@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Indicator } from "../components/Indicator";
 import { NumericAnswerItem } from "../components/NumericAnswerItem";
 import { AppButton } from "../components/AppButton";
 import { Header } from "../components/Header";
 
 const StepFour = ({ onGoNextPage }) => {
+  const [userAns, setUserAns] = useState(null)
+
   const answerOption = [
     {
       id: 'numeric-answer-1',
@@ -41,11 +43,13 @@ const StepFour = ({ onGoNextPage }) => {
                   key={answerItem.id} 
                   id={answerItem.id} 
                   answerText={answerItem.answerText} 
+                  isChecked={userAns === answerItem.id}
+                  onChange={() => setUserAns(answerItem.id)}
                 />
               ))}
             </ul>
             <AppButton 
-              isDisabled={false} 
+              isDisabled={!userAns} 
               id="next-btn"
               buttonText="Завершить"
               type="submit"

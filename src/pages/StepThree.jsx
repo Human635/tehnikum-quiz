@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Indicator } from "../components/Indicator";
 import { Header } from "../components/Header";
 import { ListedAnswerEmoji } from "../components/ListedAnswerEmoji";
 import { AppButton } from "../components/AppButton";
 
 const StepThree = ({ onGoNextPage }) => {
+  const [checkedEmoji, setCheckedEmoji] = useState(null)
+
   const id  = [
     {
       id: 'variant-1',
@@ -48,12 +50,14 @@ const StepThree = ({ onGoNextPage }) => {
                     src={answerItem.src}
                     alt={answerItem.alt}
                     PPP={answerItem.text} 
-                    />
-                    ))
-                  }
+                    isChecked={checkedEmoji === answerItem.id}
+                    onChange={() => setCheckedEmoji(answerItem.id)}
+                  />
+                ))
+              }
             </ul>
             <AppButton 
-              isDisabled={true} 
+              isDisabled={!checkedEmoji} 
               id="next-btn"
               buttonText="Далее"
               type="submit"

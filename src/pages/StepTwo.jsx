@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Indicator } from "../components/Indicator";
 import { Header } from "../components/Header";
 import { ListedAnswerItem } from "../components/ListedAnswerItem";
 import { AppButton } from "../components/AppButton";
 
 const StepTwo = ({ onGoNextPage }) => {
+  const [checkedItem, setCheckedItem] = useState(null)
+
   const answerTypes = [
     {
       id: 'variant=1',
@@ -39,12 +41,14 @@ const StepTwo = ({ onGoNextPage }) => {
                     key={answerItem.id}
                     id={answerItem.id}
                     answerText={answerItem.text} 
+                    isChecked={checkedItem === answerItem.id}
+                    onChange={() => setCheckedItem(answerItem.id)}
                   />
                 ))
               }
             </ul>
             <AppButton 
-              isDisabled={false} 
+              isDisabled={!checkedItem} 
               id="next-btn"
               buttonText="Далее"
               type="submit"

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Indicator } from "../components/Indicator";
 import { Header } from "../components/Header";
 import { AppInput } from "../components/AppInput";
 import { AppButton } from "../components/AppButton";
 
 const StepOne = ({ onGoNextPage }) => {
+  const [userAns, setUserAns] = useState(null)
+
+  const btnActive = !userAns
+
   return (
     <div className="container">
       <div className="wrapper">
@@ -18,9 +22,10 @@ const StepOne = ({ onGoNextPage }) => {
               name="answer"
               placeholder="Ваш ответ"
               errorText="Введите номер в правильном формате например"
+              onChange={(e) => setUserAns(e.target.value)}
             />
             <AppButton 
-              isDisabled={false}
+              isDisabled={btnActive}
               type="submit"
               id="next-btn"
               buttonText="Далее"
